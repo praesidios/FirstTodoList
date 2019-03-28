@@ -29,8 +29,7 @@ export class Task extends React.Component {
               className="deleteButton"
               onClick={() => this.deleteTask(task.id)}>
               x
-                    </span>
-
+            </span>
           </li>
         )
       })
