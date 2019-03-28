@@ -1,7 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { TaskList } from './TaskList';
+import ReactDOM  from 'react-dom';
+import { App } from './App.jsx'
 
-ReactDOM.render(<TaskList />, document.getElementById('root'));
 
+
+ReactDOM.render(
+    <App />, 
+    document.getElementById('root')
+  );
