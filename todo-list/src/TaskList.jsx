@@ -1,62 +1,48 @@
 import React, { Component } from 'react';
+import { List } from './List.jsx'
+
 
 export class TaskList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
-      tasks: null, 
+      tasks: [],
       isLoading: true,
     };
   }
 
   componentDidMount() {
+    console.log('didmount')
     this.fetchTasks()
   }
 
-  fetchTasks(){
+  fetchTasks() {
     fetch('api/tasks')
       .then(response => response.json())
       .then(tasks => {
         this.setState({
           tasks,
-          isLoading: false
+          isLoading: false,
+          inputValue: ''
         });
       });
   }
 
-  componentDidUpdate(){
-    this.fetchTasks()
+  componentDidUpdate() {
+    console.log('update')
   }
 
 
-  handleChangeDes() {
-    fetch('api/tasks/' + this.state.tasks.id, {
-      method: 'PUT',
-      body: JSON.stringify({description: "say hello"}),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-  } 
-
-  onChange = (evt) => {
-    this.setState({ tasks: evt.target.value});
-  }
-
-  render(){
-    return this.state.isLoading ? 
+  render() {
+    console.log('render')
+    return this.state.isLoading ?
       '..Loading' : (
-        <div className = "taskList">
-          {this.state.tasks.map(task => (
-            <input 
-              value = {task.description}
-              className = "task"
-              key = {task.id}
-              onChange={this.onChange}
-            />
-          ))}
+        <div>
+          <List
+            tasks={this.state.tasks} />
         </div>
-    )
+
+      )
   }
 }
