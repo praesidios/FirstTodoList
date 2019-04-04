@@ -38,15 +38,13 @@ export class AddTaskInput extends React.Component {
 
   render() {
     return (
-      <div className="inputContainer">
         <input
-          className="taskInput"
+          className="addTaskInput"
           type="text"
           value={this.state.inputValue}
           onChange={this.handleChange}
-          placeholder="Add a task"
+          placeholder="Add task"
           onKeyPress={this.addTask} />
-      </div>
     )
   }
 }

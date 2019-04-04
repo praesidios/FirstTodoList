@@ -11,6 +11,16 @@ export class Task extends React.Component {
   }
 
 
+  updateTodo = (evt, id) => {
+    fetch(`api/tasks/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ isDone: evt.target.checked }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+
   render() {
     return (
       this.props.tasks.map((task) => {
@@ -21,7 +31,9 @@ export class Task extends React.Component {
 
             <input
               className="taskCheckbox"
-              type="checkbox" />
+              type="checkbox"
+              checked = {task.isDone}
+              onChange={(evt) => this.updateTodo(evt, task.id)}/>
             <label className="taskLabel">
               {task.description}
             </label>

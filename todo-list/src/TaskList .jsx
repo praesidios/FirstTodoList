@@ -15,7 +15,7 @@ export class TaskList extends  React.Component {
   getTodos() {
     fetch('api/tasks')
       .then(response => response.json())
-      .then(tasks => this.setState({
+      .then(tasks => this.setState({  
         tasks,
         isLoading: false
       }));

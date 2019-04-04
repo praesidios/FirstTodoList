@@ -1,8 +1,8 @@
-ul.taskList {
-	padding: 0 25px;
+.taskList {
+	padding: 0 10px;
 }
 
-li.task {
+.task {
 	list-style-type: none;
 	font-family: Tahoma;
 	font-size: 1.2em;
@@ -10,17 +10,12 @@ li.task {
 	border-bottom: 1px solid #ccc;
 }
 
-li.task:hover .deleteButton {
-	visibility: visible;
-	opacity: 1;
-	cursor: pointer;
-}
 
-input.taskCheckbox {
+.taskCheckbox {
 	position: relative;
 	float: left;
 	margin-right: 10px;
-	-webkit-appearance: none;
+	appearance: none;
 	width: 20px;
 	height: 20px;
 	border: 1px solid #ccc;
@@ -32,7 +27,7 @@ input.taskCheckbox {
 	font-weight: bold;
 }
 
-input.taskCheckbox:checked:after {
+.taskCheckbox:checked:after  {
 	color: green;
 	content: "\2713";
 	display: block;
@@ -44,16 +39,12 @@ input.taskCheckbox:checked:after {
 	bottom: 2px;
 }
 
-input.taskCheckbox + label.taskLabel {
-	color: black;
-}
-
-input.taskCheckbox:checked + label.taskLabel {
+.taskCheckbox:checked + .taskLabel {
 	text-decoration: line-through;
 	color: #656565;
 }
 
-input[placeholder] {
+.addTaskInput[placeholder] {
 	font-size: 1.1em;
 }
 
@@ -76,11 +67,13 @@ input[placeholder] {
 	padding: 15px;
 }
 
-.inputContainer .taskInput {
+ .addTaskInput {
+	margin-top: 15px;
 	padding: 10px;
 	width: 100%;
 	border-radius: 25px;
 	box-sizing: border-box;
+	outline: none;
 }
 
 .listWrapper {
@@ -94,14 +87,14 @@ input[placeholder] {
 .deleteButton {
 	float: right;
 	color: red;
-	background: rgba(0,0,0,0);
-	font-size: 20px;
 	font-weight: bold;
-	border: 1px solid white;
-	border-radius: 50%;
 	padding: 10px 5px;
 	visibility: hidden;
-	opacity: 0;
 	line-height: 0;
 	margin-right: 5px;
+}
+
+li.task:hover .deleteButton {
+	visibility: visible;
+	cursor: pointer;
 }
