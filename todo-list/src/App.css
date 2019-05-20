@@ -84,17 +84,39 @@
 	left: 0;
 }
 
+.taskLabel span {
+	margin: 0px;
+	width: 400px;
+}
+
+.deleteButton img {
+	width: 18px;
+}
+
 .deleteButton {
-	float: right;
-	color: red;
-	font-weight: bold;
-	padding: 10px 5px;
+	float: right;;
 	visibility: hidden;
 	line-height: 0;
 	margin-right: 5px;
 }
 
 li.task:hover .deleteButton {
+	visibility: visible;
+	cursor: pointer;
+}
+
+.editIcon {
+	float: right;
+	visibility: hidden;
+	line-height: 0;
+	margin-right: 15px;
+}
+
+.editIcon img {
+	width: 18px;
+}
+
+li.task:hover .editIcon {
 	visibility: visible;
 	cursor: pointer;
 }

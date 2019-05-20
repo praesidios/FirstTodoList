@@ -1,29 +1,12 @@
-import React from 'react'
+import React from 'react';
+import editIcon from './img/edit.png';
+import deleteIcon from './img/deleteIcon.png';
 
 
-export class Task extends React.Component {
-
-
-  deleteTask = (id) => {
-    fetch(`api/tasks/${id}`, {
-      method: 'DELETE'
-    })
-  }
-
-
-  updateTodo = (evt, id) => {
-    fetch(`api/tasks/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ isDone: evt.target.checked }),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-  }
-
-  render() {
+  export const Task = (props) => {
     return (
-      this.props.tasks.map((task) => {
+      props.tasks.map((task) => {
+
         return (
           <li
             className="task"
@@ -33,18 +16,21 @@ export class Task extends React.Component {
               className="taskCheckbox"
               type="checkbox"
               checked = {task.isDone}
-              onChange={(evt) => this.updateTodo(evt, task.id)}/>
+              onChange={(evt) => props.isDone(evt, task.id)}/>
             <label className="taskLabel">
-              {task.description}
+              <span>{task.description}</span>
             </label>
             <span
               className="deleteButton"
-              onClick={() => this.deleteTask(task.id)}>
-              x
+              onClick={() => props.delete(task.id)}>
+              <img src={deleteIcon} alt="Delete Icon"/>
+            </span>
+            <span className="editIcon">
+              <img src={editIcon} alt="Edit Icon"/>
             </span>
           </li>
-        )
+        );
+
       })
-    )
+    );
   }
-}

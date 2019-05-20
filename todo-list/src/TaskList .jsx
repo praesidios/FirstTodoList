@@ -5,53 +5,104 @@ import { AddTaskInput } from './AddTaskInput.jsx'
 export class TaskList extends  React.Component {
   constructor(props) {
     super(props)
+    
 
     this.state = {
       tasks: null,
-      isLoading: true
+      isLoading: true,
+      inputValue: ''
     }
   }
 
+
+
   getTodos() {
-    fetch('api/tasks')
+    fetch('api/tasks/')
       .then(response => response.json())
       .then(tasks => this.setState({  
         tasks,
-        isLoading: false
+        isLoading: false,
       }));
   }
 
+  deleteTask = (id) => {
+    fetch(`api/tasks/${id}`, {
+      method: 'DELETE'
+    })
+    .then(() => { 
+      this.getTodos()
+    });
+  };
+
+
+  isDone = (evt, id) => {
+    fetch(`api/tasks/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ isDone: evt.target.checked }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(() => { 
+        this.getTodos()
+      })
+  };
   
+
+
+  addTask = (evt) => {
+    if (evt.key === 'Enter') {
+      fetch('api/tasks/', {
+        method: 'POST',
+        body: JSON.stringify({ description: evt.target.value }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(() => {
+          this.setState({
+            inputValue: ''
+          });
+        })
+        .then(() => { 
+          this.getTodos()
+        })
+    }
+  }
+
+
   componentDidMount() {
     this.getTodos()
-    console.log('DidMount')
   }
 
 
-  componentDidUpdate(prevState, prevProps){
-    console.log('Update')
-    console.log('prevState', prevState)
-    console.log('this.State', this.state)
-    console.log('prevProps', prevProps)
-    console.log('thisProps', this.props)
-
+  handleChange = (evt) => {
+    this.setState({ inputValue: evt.target.value });
   }
+
+
+
 
   render() {
-    console.log("render")
 
     return this.state.isLoading ? 
       '...Loading...' : (
         <>
-          <AddTaskInput/>
+          <AddTaskInput
+            addTask = {this.addTask}
+            value = {this.state.inputValue}
+            handleChange = {this.handleChange}
+          />
           <div className="listWrapper">
             <ul className="taskList">
               <Task
                 tasks = {this.state.tasks}
+                delete = {this.deleteTask}
+                isDone = {this.isDone}
               />
             </ul>
           </div>
         </>
-      )
+      ) 
   }
 }
