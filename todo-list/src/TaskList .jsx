@@ -81,28 +81,26 @@ export class TaskList extends  React.Component {
   }
 
 
-
-
   render() {
 
-    return this.state.isLoading ? 
+    return (this.state.isLoading ? 
       '...Loading...' : (
-        <>
-          <AddTaskInput
-            addTask = {this.addTask}
-            value = {this.state.inputValue}
-            handleChange = {this.handleChange}
-          />
-          <div className="listWrapper">
-            <ul className="taskList">
+        <div className="content">
+          <div className="App">
+            <ul className="Tasklist">
               <Task
                 tasks = {this.state.tasks}
                 delete = {this.deleteTask}
                 isDone = {this.isDone}
               />
             </ul>
-          </div>
-        </>
+        </div>
+        <div className="sticky">
+          <i className="large material-icons ">
+            add_circle
+          </i>
+        </div>
+      </div>
       ) 
-  }
+    )}
 }
