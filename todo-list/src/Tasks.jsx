@@ -2,7 +2,7 @@ import React from 'react'
 import { Task } from './Task'
 
 
-export class TaskList extends  React.Component {
+export class Tasks extends  React.Component {
   constructor(props) {
     super(props)
     

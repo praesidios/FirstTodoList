@@ -1,26 +1,37 @@
-import React from 'react'
+import React from 'react';
 
 
 
-export class List extends React.Component {
+export const Task = (props) => {
+  return (
+    props.tasks.map((task) => {
 
+      return (
+        <li
+          className="liTask"
+          key={task.id}>
 
-  render() {
-    return (
-      <div className="taskList">
-        <ul>
-          {this.props.tasks.map(task => (
-            <div key = {task.id}>
-              <input type="checkbox"
+            <div className="taskContainer">
+              <input 
+                className="taskCheckbox"
+                id = {task.id}
+                type="checkbox" 
+                checked = {task.isDone} 
+                onChange={(evt) => props.isDone(evt, task.id)}
               />
-              <li
-                className="task">
-                {task.description}
-              </li>
+              <label className="description" htmlFor={task.id}>
+                  {task.description}
+              </label>
+              <i 
+                className="small material-icons deleteButton"
+                onClick={() => props.delete(task.id)} 
+              >
+                delete_forever
+              </i>
             </div>
-          ))}
-        </ul>
-      </div>
-    )
-  }
+
+        </li>
+      );
+    })
+  );
 }

@@ -1,38 +1,88 @@
 * {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	padding: 0
+}
+.content {
+	width: 60%;
+	height:100vh;
+	display: grid;
+	margin: 0 auto;
+	background: #E5E5E5;
+	font-size: 18px;
 }
 
-body {
-  font-size: 14px
+.App {
+	margin: 90px auto;
+	width: 70%;
+}
+.liTask {
+	list-style-type: none
+}
+.taskCheckbox {
+	display: none;
+}
+.taskContainer {
+	display: grid;
+	position: relative;
 }
 
-#root{
-  margin: 0 auto;
-  background: rgb(229, 233, 239);
-  width: 50%;
-  min-height: 100%;
-  position: absolute;
-  left: 25%;
+.description {
+	background: white;
+	padding: 2px;
+	margin-bottom: 5px
 }
 
-.taskList{
-  margin-top: 100px
+.description::before {
+	content: '';
+	width: 20px;
+	height: 20px;	
+	background: white;
+	display: inline-block;
+	margin-right: 10px;
+	margin-left: -30px;
+	margin-bottom: 5px;
+	border-radius: 50%;
+	border: 1px solid #009688;
+	vertical-align: middle;
+	transition: .2s;
 }
 
-.task{
-  display: block;
-  margin: 0 auto;
-  width: 400px;
-  height: 20px;
-  background: white;
-  margin-bottom: 15px;
-  padding: 5px;
-  border: none;
-  box-shadow: 0px 0px 6px 0px;  
+.taskCheckbox:checked + .description::before {
+	background: #009688;
+}
+.description:hover {
+	cursor: pointer;
+}
+.taskCheckbox:checked + .description {
+	text-decoration: line-through;
+	text-decoration-color: #009688;
+}
+
+.deleteButton {
+	color:#009688;
+	position: absolute;
+	right: -30px;	
+}
+
+.deleteButton:hover {
+	cursor: pointer;
+}
+
+.sticky i{
+	font-size: 70px;
+	color: #009688;
+}
+
+
+.sticky {
+	position: sticky;
+	bottom: 0;
+	margin-left: 740px;
+	margin-top: 200px;
+}
+
+.sticky i:hover{
+	font-size: 72px;
+	color: #107c71;
+	cursor: pointer;
 }
