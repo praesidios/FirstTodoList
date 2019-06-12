@@ -1,5 +1,4 @@
 import React from 'react'
-import { Task } from './Task'
 
 
 export class Tasks extends  React.Component {
@@ -76,27 +75,48 @@ export class Tasks extends  React.Component {
   }
 
 
+  renderTasks = (arr) => {
+    return (
+      arr.map((task) => {
+        const { id, description, isDone}  = task;
+
+        return (
+          <div
+            className="task"
+            key={id}>
+
+              <input 
+                className="taskCheckbox"
+                id = {id}
+                type="checkbox" 
+                checked = {isDone} 
+                onChange={(evt) => this.isDone(evt, id)}
+              />
+              <label className="description" htmlFor={id}>
+                  {description}
+              </label>
+              <i 
+                className="small material-icons deleteButton"
+                onClick={() => this.deleteTask(task.id)} >
+                delete_forever
+              </i>
+
+          </div>
+        );
+      })
+    );
+  }
+
+
 
   render() {
+    const { tasks, isLoading } = this.state;
 
-    return (this.state.isLoading ? 
+    return (isLoading ? 
       '...Loading...' : (
-        <div className="content">
-          <div className="App">
-            <ul className="Tasklist">
-              <Task
-                tasks = {this.state.tasks}
-                delete = {this.deleteTask}
-                isDone = {this.isDone}
-              />
-            </ul>
+        <div className="tasksWrap">
+          {this.renderTasks(tasks)}
         </div>
-        <div className="sticky">
-          <i className="large material-icons ">
-            add_circle
-          </i>
-        </div>
-      </div>
       ) 
     )}
 }

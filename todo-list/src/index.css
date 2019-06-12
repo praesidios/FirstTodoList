@@ -2,28 +2,29 @@
 	margin: 0;
 	padding: 0
 }
-.content {
+.container {
+	font-family: 'Roboto', sans-serif;
 	width: 60%;
 	height:100vh;
-	display: grid;
 	margin: 0 auto;
 	background: #E5E5E5;
-	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 
-.App {
-	margin: 90px auto;
+.tasksWrap {
 	width: 70%;
+	margin-top: 100px;
 }
-.liTask {
-	list-style-type: none
-}
-.taskCheckbox {
-	display: none;
-}
-.taskContainer {
+
+.task { 
 	display: grid;
-	position: relative;
+	grid-template-columns: 92% 8%;
+}
+
+.taskCheckbox {
+	display: none;	
 }
 
 .description {
@@ -60,29 +61,8 @@
 
 .deleteButton {
 	color:#009688;
-	position: absolute;
-	right: -30px;	
 }
 
 .deleteButton:hover {
-	cursor: pointer;
-}
-
-.sticky i{
-	font-size: 70px;
-	color: #009688;
-}
-
-
-.sticky {
-	position: sticky;
-	bottom: 0;
-	margin-left: 740px;
-	margin-top: 200px;
-}
-
-.sticky i:hover{
-	font-size: 72px;
-	color: #107c71;
 	cursor: pointer;
 }
