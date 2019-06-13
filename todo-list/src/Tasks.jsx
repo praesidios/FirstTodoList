@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { Functions} from './Functions';
+import spinner from'./spinner.gif';
+
 
 
 export class Tasks extends  React.Component {
@@ -7,17 +10,20 @@ export class Tasks extends  React.Component {
     
 
     this.state = {
-      tasks: null,
-      isLoading: true,
-      inputValue: ''
+      tasks: [],
+      isLoading: true
     }
   }
 
+  Functions = new Functions()
+
+  componentDidMount() {
+    this.updateTaskList()
+  }
 
 
-  getTodos() {
-    fetch('api/tasks/')
-      .then(response => response.json())
+  updateTaskList() {
+    this.Functions.getTask()
       .then(tasks => this.setState({  
         tasks,
         isLoading: false,
@@ -25,55 +31,20 @@ export class Tasks extends  React.Component {
   }
 
   deleteTask = (id) => {
-    fetch(`api/tasks/${id}`, {
-      method: 'DELETE'
-    })
+    this.Functions.delete(id)
     .then(() => { 
-      this.getTodos()
+      this.updateTaskList()
     });
   };
 
 
   isDone = (evt, id) => {
-    fetch(`api/tasks/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ isDone: evt.target.checked }),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
+    this.Functions.changeStatus(evt, id)
       .then(() => { 
-        this.getTodos()
+        this.updateTaskList()
       })
   };
   
-
-
-  // addTask = (evt) => {
-  //   if (evt.key === 'Enter') {
-  //     fetch('api/tasks/', {
-  //       method: 'POST',
-  //       body: JSON.stringify({ description: evt.target.value }),
-  //       headers: {
-  //         'content-type': 'application/json'
-  //       }
-  //     })
-  //       .then(() => {
-  //         this.setState({
-  //           inputValue: ''
-  //         });
-  //       })
-  //       .then(() => { 
-  //         this.getTodos()
-  //       })
-  //   }
-  // }
-
-
-  componentDidMount() {
-    this.getTodos()
-  }
-
 
   renderTasks = (arr) => {
     return (
@@ -112,11 +83,16 @@ export class Tasks extends  React.Component {
   render() {
     const { tasks, isLoading } = this.state;
 
-    return (isLoading ? 
-      '...Loading...' : (
-        <div className="tasksWrap">
-          {this.renderTasks(tasks)}
+    if(isLoading){
+      return(
+        <div className="spinner">
+          <img src={spinner} alt="spinner"/>
         </div>
-      ) 
+      )
+    }
+    return (
+      <div className="tasksWrap">
+        {this.renderTasks(tasks)}
+      </div>
     )}
 }

@@ -2,6 +2,11 @@
 	margin: 0;
 	padding: 0
 }
+
+.spinner {
+	margin-top: 20%
+}
+
 .container {
 	font-family: 'Roboto', sans-serif;
 	width: 60%;
@@ -20,7 +25,7 @@
 
 .task { 
 	display: grid;
-	grid-template-columns: 92% 8%;
+	grid-template-columns: 100% 1fr;
 }
 
 .taskCheckbox {
