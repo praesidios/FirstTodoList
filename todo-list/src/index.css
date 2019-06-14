@@ -15,7 +15,6 @@
 	background: #E5E5E5;
 	display: flex;
 	justify-content: center;
-	align-content: center;
 }
 
 .tasksWrap {
@@ -70,4 +69,27 @@
 
 .deleteButton:hover {
 	cursor: pointer;
+}
+
+
+.buttonWrap {
+	position: fixed;
+	bottom: 2%;
+	right: 21%;
+}
+
+.buttonWrap i {
+	color: #009688;
+	font-size: 70px
+}
+
+.buttonWrap i:hover {
+	cursor: pointer;
+	color: #01c2c2;
+}
+
+
+.createBar {
+	width: 250px;
+	height: 100px;
 }
